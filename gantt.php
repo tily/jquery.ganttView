@@ -6,7 +6,7 @@ define('DB_USER', getenv('C4SA_MYSQL_USER'));
 define('DB_PASSWORD', getenv('C4SA_MYSQL_PASSWORD'));
 define('DB_HOST', getenv('C4SA_MYSQL_HOST'));
 
-$dsn = "mysql:dbname=" + DB_NAME + ";host="+ DB_HOST;
+$dsn = "mysql:dbname=".DB_NAME.";host=".DB_HOST;
 $user = DB_USER;
 $password = DB_PASSWORD;
 
