@@ -25,9 +25,9 @@ $i = 0;
 $sql = 'select * from json_data';
 foreach ($dbh->query($sql) as $row) {
 	$data[i]["id"] = $row['id'];
-	$data[i]["name"] = $row['name'];
-	$data[i]["project"] = $row[''];
-	$data[i]["member"] = $row['id'];
+	$data[i]["name"] = mb_convert_encoding($row['name'], "UTF-8", "auto");
+	$data[i]["project"] = mb_convert_encoding($row['project'], "UTF-8", "auto");
+	$data[i]["member"] = mb_convert_encoing($row['id'], "UTF-8", "auto");
 	$data[i]["start"] = $row['id'];
 	$data[i]["end"] = $row['id'];
 	$data[i]["color"] = $row['id'];
@@ -35,6 +35,8 @@ foreach ($dbh->query($sql) as $row) {
 }
 
 //JSONに変換
+
+$data_json = json_encode($data);
 
 //?mode=projectで呼び出されたとき
 
