@@ -23,7 +23,7 @@
 	</div>
 	<div id="ganttChart"></div>
 	<br/><br/>
-	<div id="add_button"><button type="button">新規</button></div>
+	<div id="new_tickets"><button type="button">新規</button></div>
 	<div id="eventMessage"></div>
 	<div id="dialog">
 		<form action="" method="GET">
@@ -38,6 +38,7 @@
 			<div>開始日：<input type="text" name="start_date"></div>
 			<div>終了日：<input type="text" name="end_date"></div>
 			<div>進捗：<input type="text" name="progress"></div>
+			<div id="submit"><button type="button">追加</button</div>
 		</form>
 	</div>
 
@@ -67,6 +68,9 @@
 				}
 			});
 			
+			$('#submit').click(function () {
+				alert('test');
+			});
 			// $("#ganttChart").ganttView("setSlideWidth", 600);
 		});
 	</script>

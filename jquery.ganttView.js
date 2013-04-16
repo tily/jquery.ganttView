@@ -136,7 +136,8 @@ behavior: {
 			}
 			return dates;
         }
-
+        
+		//VzHeader:tickets part
         function addVtHeader(div, data, cellHeight) {
             var headerDiv = jQuery("<div>", { "class": "ganttview-vtheader" });
             for (var i = 0; i < data.length; i++) {
@@ -155,7 +156,8 @@ behavior: {
             }
             div.append(headerDiv);
         }
-
+        
+		//HzHeader:gantt part
         function addHzHeader(div, dates, cellWidth) {
             var headerDiv = jQuery("<div>", { "class": "ganttview-hzheader" });
             var monthsDiv = jQuery("<div>", { "class": "ganttview-hzheader-months" });
