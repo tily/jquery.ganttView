@@ -20,6 +20,19 @@ try{
 }
 
 //DBを読み込む
+$data = [];
+$i = 0;
+$sql = 'select * from json_data';
+foreach ($dbh->query($sql) as $row) {
+	$data[i]["id"] = $row['id'];
+	$data[i]["name"] = $row['name'];
+	$data[i]["project"] = $row[''];
+	$data[i]["member"] = $row['id'];
+	$data[i]["start"] = $row['id'];
+	$data[i]["end"] = $row['id'];
+	$data[i]["color"] = $row['id'];
+	$i++;
+}
 
 //JSONに変換
 
