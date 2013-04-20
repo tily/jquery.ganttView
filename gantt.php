@@ -1,5 +1,7 @@
 ﻿<?php
 
+mb_internal_encoding("UTF-8");
+
 //DB設定、接続
 define('DB_NAME', getenv('C4SA_MYSQL_DB'));
 define('DB_USER', getenv('C4SA_MYSQL_USER'));
@@ -19,35 +21,129 @@ try{
     die();
 }
 
-//DBを読み込む
-$data = [];
-$i = 0;
-$sql = 'select * from json_data';
-foreach ($dbh->query($sql) as $row) {
-	$data[i]["id"] = $row['id'];
-	$data[i]["name"] = mb_convert_encoding($row['name'], "UTF-8", "auto");
-	$data[i]["project"] = mb_convert_encoding($row['project'], "UTF-8", "auto");
-	$data[i]["member"] = mb_convert_encoing($row['id'], "UTF-8", "auto");
-	$data[i]["start"] = $row['id'];
-	$data[i]["end"] = $row['id'];
-	$data[i]["color"] = $row['id'];
-	$i++;
+
+if($_SERVER["REQUEST_METHOD"] != "POST"){
+	//DBを読み込む
+	$data = [];
+	$i = 0;
+	$sql = 'select * from json_data';
+	foreach ($dbh->query($sql) as $row) {
+		$data[i]["id"] = $row['id'] - 1;
+		$data[i]["name"] = $row['name'], "UTF-8", "auto");
+		$data[i]["project"] = $row['project'], "UTF-8", "auto");
+		$data[i]["member"] = $row['member'], "UTF-8", "auto");
+		$data[i]["memo"] = $row['memo'], "UTF-8", "auto");
+		$data[i]["start"] = $row['start'];
+		$data[i]["end"] = $row['end'];
+		$data[i]["color"] = $row['color'];
+		$data[i]["number"] = $row['number'];
+		$i++;
+	}
+	
+	//?mode=projectで呼び出されたとき
+	if($_GET['mode'] == "project"){
+		//JSONに変換
+		
+		//キー(project)を取得
+//jsonデータ形式
+//		var ganttData = [
+//	{
+//		id: 1, name: "Feature 1", series: [
+//			{ name: "Planned", start: new Date(2010,00,01), end: new Date(2010,00,03) },
+//			{ name: "Actual", start: new Date(2010,00,02), end: new Date(2010,00,05), color: "#f0f0f0" }
+//		]
+//	},{},{}...
+		$i = 0;
+		$get_key_sql = 'select distinct project from json_data';
+		foreach ($dbh->query($get_key_sql as $prj_key){
+			$data_json[i]["id"] = $i;
+			$data_json[i]["project"] = $prj_key;
+		}
+		
+		//データを格納(上のデータ形式にそって)
+		for ($i = 0; $i < count($data), $i++){				
+			for ($j = 0; $j < count($data_json["project"]), $j++){
+				if (strcmp($data_json[j]["project"], $data[i]["project"]) == 0){
+					array_splice($data_json[j]["project"]["series"], $data[j]["number"], 0, $data[j]);
+				}
+			}
+		}
+		
+		$json_out = json_encode($data_json);
+
+		//出力
+		print $json_out;
+	}
+	//?mode=memberで呼び出されたとき
+	else if ($_GET['mode'] == "member"){
+		$i = 0;
+		$get_key_sql = 'select distinct member from json_data';
+		foreach ($dbh->query($get_key_sql as $mmb_key){
+			$data_json[i]["num"] = $i;
+			$data_json[i]["member"] = $mmb_key;
+		}
+		
+		//データを格納(上のデータ形式にそって)
+		for ($i = 0; $i < count($data), $i++){				
+			for ($j = 0; $j < count($data_json["member"]), $j++){
+				if (strcmp($data_json[j]["member"], $data[i]["member"]) == 0){
+					array_splice($data_json[j]["member"]["series"], $data[j]["number"], 0, $data[j]);
+				}
+			}
+		}
+		
+		$json_out = json_encode($data_json);
+
+		//出力
+		print $json_out;
+	}
+}
+else{
+	$json_str = $_POST['json'];
+	$data = json_decode($json_str, true);
+	
+	if ($_POST['mode'] == 'add'){
+		//チケット追加
+		$add_sql = "insert into json_data name, project, member, memo, start, end, color, number values \'".
+			$data["name"]. "\', \'". $data["project"]. "\', \'".$data["member"]. "\', \'".$data["memo"]. ",".
+			$data["start"]. ",".$data["end"]. ", \'"$data["color"]. "\', ".$data["number"];
+		$dbh->query($add_sql);
+		
+	}
+	else if ($_POST['mode'] == 'update'){
+		//チケット更新
+		if (isset($data["number"]){
+			change_numbers($dbh, $data["project"], $data["number"]);
+		}
+		$update_sql = "update json_data set ";
+		for ($i = 1; $i < count($data); $i++){
+			$key = key($data);
+			if ($key === "name" || $key === "project" || $key === "member" || $key === "memo" || $key === "color"){
+				$update_sql = $update_sql. $key. "= \'". $data["$key"]. "\',";
+			}
+			else {
+				$update_sql = $update_sql. $key. "= ". $data["$key"]. ",";
+			}
+		}
+		
+		$key = key($data);
+		if ($key === "name" || $key === "project" || $key === "member" || $key === "memo" || $key === "color"){
+			$update_sql = $update_sql. $key. "= \'". $data["$key"]. "\'";
+		}
+		else {
+			$update_sql = $update_sql. $key. "= ". $data["$key"];
+		}
+		$dbh->query($add_sql);
+		
+	}
+	
 }
 
-//JSONに変換
-
-$data_json = json_encode($data);
-
-//?mode=projectで呼び出されたとき
-
-
-
-
-//?mode=memberで呼び出されたとき
-
-
-//出力
-
-//チケット追加
-
-//チケット更新
+function change_numbers($dbh, $prj, $num){
+	$count_sql= "select count(*) from json_data where project=". $prj;
+	$result = $dbh->query($count_sql);
+	for ($i = $result; $i >= $num; $i--){
+		$update_sql = 'update json_data set number='.$i + 1." where project =\'". $prj. "\' and number=".$i;
+		$dbh->query($update_sql);
+	}
+}
