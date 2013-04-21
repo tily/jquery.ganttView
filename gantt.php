@@ -66,13 +66,12 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 		//出力
 		print $json_out;
 	}
-}
 	//?mode=memberで呼び出されたとき
 	else if ($_GET['mode'] == "member"){
 		$i = 0;
 		$get_key_sql = 'select distinct member from json_data';
-		foreach ($dbh->query($get_key_sql as $mmb_key){
-			$push_array = array("id" => $i, "member" => $prj_key["member"], "series" => array());
+		foreach ($dbh->query($get_key_sql) as $mmb_key){
+			$push_array = array("id" => $i, "member" => $mmb_key["member"], "series" => array());
 			array_push($data_json, $push_array);
             $i++;
 		}
