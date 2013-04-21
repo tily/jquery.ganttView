@@ -91,20 +91,22 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 		print $json_out;
 	}
 }
-/*
 else{
 	$json_str = $_POST['json'];
+    $data = array();
 	$data = json_decode($json_str, true);
 	
 	if ($_POST['mode'] === 'add'){
 		//チケット追加
-		$add_sql = "insert into json_data name, project, member, memo, start, end, color, number values \'$data[\"name\"], \'$data[\"project\"]\', \'$data[\"member\"]\', \'$data[\"memo\"]\',$data[\"start\"],$data[\"end\"], \'$data[\"color\"]\', $data[\"number\"]";
+      $add_sql = "insert into json_data name values test";
+      //PDOなんだから、？を使おう
+      //$add_sql = "insert into json_data name, project, member, memo, start, end, color, number values \'$data[\"name\"], \'$data[\"project\"]\', \'$data[\"member\"]\', \'$data[\"memo\"]\',$data[\"start\"],$data[\"end\"], \'$data[\"color\"]\', $data[\"number\"]";
 		$exec = $dbh->query($add_sql);
 		
 	}
 	else if ($_POST['mode'] === 'update'){
 		//チケット更新
-		if (isset($data["number"]){
+		if (isset($data["number"])){
 			change_numbers($dbh, $data["project"], $data["number"]);
 		}
 		$update_sql = "update json_data set ";
@@ -135,8 +137,7 @@ function change_numbers($dbh, $prj, $num){
 	$count_sql= "select count(*) from json_data where project=". $prj;
 	$result = $dbh->query($count_sql);
 	for ($i = $result; $i >= $num; $i--){
-		$update_sql = 'update json_data set number='.$i + 1." where project =\'". $prj. "\' and number=".$i;
+		$update_sql = 'update json_data set number='.$i++." where project =\'". $prj. "\' and number=".$i;
 		$dbh->query($update_sql);
 	}
 }
-*/
