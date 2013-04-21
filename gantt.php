@@ -95,15 +95,15 @@ else{
 	$json_str = $_POST['json'];
 	$data = json_decode($json_str, true);
 	
-	if ($_POST['mode'] == 'add'){
+	if ($_POST['mode'] === 'add'){
 		//チケット追加
 		$add_sql = "insert into json_data name, project, member, memo, start, end, color, number values \'".
 			$data["name"]. "\', \'". $data["project"]. "\', \'".$data["member"]. "\', \'".$data["memo"]. ",".
 			$data["start"]. ",".$data["end"]. ", \'"$data["color"]. "\', ".$data["number"];
-		$dbh->query($add_sql);
+		$exec = $dbh->query($add_sql);
 		
 	}
-	else if ($_POST['mode'] == 'update'){
+	else if ($_POST['mode'] === 'update'){
 		//チケット更新
 		if (isset($data["number"]){
 			change_numbers($dbh, $data["project"], $data["number"]);
