@@ -12,10 +12,11 @@ $dsn = "mysql:dbname=".DB_NAME.";host=".DB_HOST;
 $user = DB_USER;
 $password = DB_PASSWORD;
 
+header("Content-type: application/json; charset=utf-8");
+
 try{
     $dbh = new PDO($dsn, $user, $password);
-    
-    print "OK";
+
 }catch (PDOException $e){
     print('Error:'.$e->getMessage());
     die();
@@ -88,6 +89,7 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 		$json_out = json_encode($data_json);
 
 		//出力
+		header("Content-type: application/json; charset=utf-8");
 		print $json_out;
 	}
 }
