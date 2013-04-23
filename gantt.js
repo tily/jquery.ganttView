@@ -1,6 +1,6 @@
-﻿$(function () {
+$(function () {
 	$("#ganttChart").ganttView({ 
-		dataUrl: "./gantt.php",
+		dataUrl: "./gantt.php?mode=project",
 		slideWidth: 900,
 		behavior: {
 			onClick: function (data) { 
