@@ -151,7 +151,7 @@ behavior: {
                     seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" })
                     	.append(data[i].series[j].name)
 						.append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" })
-						.append(data[i].series[j].memo))
+						.append(data[i].series[j].memo)
 						.append(jQuery("<div>", { "class": "ganttview-vtheader-series-member" })
 						.append(data[i].series[j].member));
                 }
