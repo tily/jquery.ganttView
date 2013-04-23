@@ -45,8 +45,8 @@ behavior: {
             showWeekends: true,
             cellWidth: 21,
             cellHeight: 31,
-            slideWidth: 400,
-            vHeaderWidth: 100,
+            slideWidth: 300,
+            vHeaderWidth: 300,
             behavior: {
             	clickable: true,
             	draggable: true,
