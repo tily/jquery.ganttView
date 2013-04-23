@@ -1,4 +1,4 @@
-/*
+﻿/*
 jQuery.ganttView v.0.8.8
 Copyright (c) 2010 JC Grubbs - jc.grubbs@devmynd.com
 MIT License Applies
@@ -148,7 +148,9 @@ behavior: {
                 }).append(data[i].project));
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
-                    seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" })
+                    var ticketsDiv = jQuery("<div>", { "class": "ganttview-vtheader-tickets" });
+                    seriesDiv.append(ticketsDiv);
+                    	ticketsDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" })
 						.append(data[i].series[j].name))
 						.append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" })
 						.append(data[i].series[j].memo))
