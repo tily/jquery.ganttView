@@ -148,7 +148,8 @@ behavior: {
                 }).append(data[i].project));
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
-                    seriesDiv.append(ticketsDiv).append(data[i].series[j].name))
+                    seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" })
+                    	.append(data[i].series[j].name)
 						.append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" })
 						.append(data[i].series[j].memo))
 						.append(jQuery("<div>", { "class": "ganttview-vtheader-series-member" })
