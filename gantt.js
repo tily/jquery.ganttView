@@ -4,7 +4,7 @@ $(function () {
 		slideWidth: 900,
 		behavior: {
 			onClick: function (data) { 
-				$("#idnmb > input").attr({value : data.id});
+				$("#id > input").attr({value : data.id});
 				$("#prj > input").attr({value : data.project});
 				$("#name > input").attr({value : data.name});
 				$("#member > input").attr({value : data.member});
@@ -26,14 +26,14 @@ $(function () {
 	
 	$('#submit').click(function (data) {
 		var record = new Object();
-		record.idd = $("#idnmb > input").attr(value);
-		record.project = $("#prj > input").attr(value);
-		record.name = $("#name > input").attr(value);
-		record.member = $("#member > input").attr(value);
-		record.start = $("#start > input").attr(value);
-		record.end = $("#end > input").attr(value);
-		record.progress = $("#progress > input").attr(value);
-		record.color = $("#color > input").attr(value);
+		record.idd = $("#id > input").attr("value");
+		record.project = $("#prj > input").attr("value");
+		record.name = $("#name > input").attr("value");
+		record.member = $("#member > input").attr("value");
+		record.start = $("#start > input").attr("value");
+		record.end = $("#end > input").attr("value");
+		record.progress = $("#progress > input").attr("value");
+		record.color = $("#color > input").attr("value");
 		
 		var json_text = JSON.stringify(record,"\t");
 		alert(json_text);
