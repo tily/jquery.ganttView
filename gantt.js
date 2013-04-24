@@ -4,8 +4,7 @@ $(function () {
 		slideWidth: 900,
 		behavior: {
 			onClick: function (data) { 
-				var msg = "You clicked on an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
-				$("#eventMessage").text(msg);
+				$("#name > input").attr({value : data.name});
 			},
 			onResize: function (data) { 
 				var msg = "You resized an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";

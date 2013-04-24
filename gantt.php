@@ -97,39 +97,24 @@ else{
 	$json_str = $_POST['json'];
     $data = array();
 	$data = json_decode($json_str, true);
-	
+	$id = shift($data);
+		
 	if ($_POST['mode'] === 'add'){
 		//チケット追加
-      $add_sql = "insert into json_data name values test";
-      //PDOなんだから、？を使おう
-      //$add_sql = "insert into json_data name, project, member, memo, start, end, color, number values \'$data[\"name\"], \'$data[\"project\"]\', \'$data[\"member\"]\', \'$data[\"memo\"]\',$data[\"start\"],$data[\"end\"], \'$data[\"color\"]\', $data[\"number\"]";
-		$exec = $dbh->query($add_sql);
-		
+      $add_sql = "insert into json_data name, project, member, memo, start, end, color, number values ?, ?, ?, ?, ?, ?, ?, ?"; 
+	  $stmt = $dbh->prepare($add_sql);
+	  $exec = $stmt->execute($data);
 	}
 	else if ($_POST['mode'] === 'update'){
 		//チケット更新
 		if (isset($data["number"])){
 			change_numbers($dbh, $data["project"], $data["number"]);
 		}
-		$update_sql = "update json_data set ";
-		for ($i = 1; $i < count($data); $i++){
-			$key = key($data);
-			if ($key === "name" || $key === "project" || $key === "member" || $key === "memo" || $key === "color"){
-				$update_sql = $update_sql. $key. "= \'". $data["$key"]. "\',";
-			}
-			else {
-				$update_sql = $update_sql. $key. "= ". $data["$key"]. ",";
-			}
-		}
-		
-		$key = key($data);
-		if ($key === "name" || $key === "project" || $key === "member" || $key === "memo" || $key === "color"){
-			$update_sql = $update_sql. $key. "= \'". $data["$key"]. "\'";
-		}
-		else {
-			$update_sql = $update_sql. $key. "= ". $data["$key"];
-		}
-		$dbh->query($add_sql);
+		$update_sql = "update json_data set name=?, project=?, member=?, memo=?, start=?, end=?, color=?, number=? where id = ?"; 
+
+		$stmt = $dbh->prepare($update_sql);
+		$data = push($id);
+		$exec = $stmt->execute($data);
 		
 	}
 	
