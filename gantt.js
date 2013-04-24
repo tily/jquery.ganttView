@@ -25,7 +25,18 @@ $(function () {
 	});
 	
 	$('#submit').click(function (data) {
-		alert(data);
+		var record = new Object();
+		record.id = $("#id > input").attr(value);
+		record.project = $("#prj > input").attr(value);
+		record.name = $("#name > input").attr(value);
+		record.member = $("#member > input").attr(value);
+		record.start = $("#start > input").attr(value);
+		record.end = $("#end > input").attr(value);
+		record.progress = $("#progress > input").attr(value);
+		record.color = $("#color > input").attr(value);
+		
+		var json_text = JSON.stringify(record,"\t");
+		alert(json_text);
 	});
 	// $("#ganttChart").ganttView("setSlideWidth", 600);
 });
