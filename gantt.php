@@ -99,13 +99,13 @@ else{
 	$data = json_decode($json_str, true);
 	$id = shift($data);
 		
-	if ($_POST['mode'] === 'add'){
+	if ($data['mode'] === 'add'){
 		//チケット追加
       $add_sql = "insert into json_data name, project, member, memo, start, end, progress, color, number values ?, ?, ?, ?, ?, ?, ?, ?, ?"; 
 	  $stmt = $dbh->prepare($add_sql);
 	  $exec = $stmt->execute($data);
 	}
-	else if ($_POST['mode'] === 'update'){
+	else if ($data['mode'] === 'update'){
 		//チケット更新
 		if (isset($data["number"])){
 			change_numbers($dbh, $data["project"], $data["number"]);

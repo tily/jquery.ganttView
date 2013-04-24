@@ -26,6 +26,7 @@ $(function () {
 	
 	$('#submit').click(function (data) {
 		var record = new Object();
+		record.mode = "add";
 		record.id = $("#id > input").attr("value");
 		record.project = $("#prj > input").attr("value");
 		record.name = $("#name > input").attr("value");
@@ -39,7 +40,7 @@ $(function () {
 		//alert(json_text);
 		$.ajax({
 			type: "POST",
-			url: "./gantt.php?mode=add",
+			url: "./gantt.php",
 			data: json_text,
 			success: function(){
 				alert("ok");
