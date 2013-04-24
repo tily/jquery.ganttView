@@ -4,7 +4,7 @@ $(function () {
 		slideWidth: 900,
 		behavior: {
 			onClick: function (data) { 
-				$("#idd > input").attr({value : data.id});
+				$("#idnmb > input").attr({value : data.id});
 				$("#prj > input").attr({value : data.project});
 				$("#name > input").attr({value : data.name});
 				$("#member > input").attr({value : data.member});
@@ -26,7 +26,7 @@ $(function () {
 	
 	$('#submit').click(function (data) {
 		var record = new Object();
-		record.idd = $("#id > input").attr(value);
+		record.idd = $("#idnmb > input").attr(value);
 		record.project = $("#prj > input").attr(value);
 		record.name = $("#name > input").attr(value);
 		record.member = $("#member > input").attr(value);
