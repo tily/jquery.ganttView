@@ -101,7 +101,7 @@ else{
 		
 	if ($_POST['mode'] === 'add'){
 		//チケット追加
-      $add_sql = "insert into json_data name, project, member, memo, start, end, color, number values ?, ?, ?, ?, ?, ?, ?, ?"; 
+      $add_sql = "insert into json_data name, project, member, memo, start, end, progress, color, number values ?, ?, ?, ?, ?, ?, ?, ?, ?"; 
 	  $stmt = $dbh->prepare($add_sql);
 	  $exec = $stmt->execute($data);
 	}
@@ -110,7 +110,7 @@ else{
 		if (isset($data["number"])){
 			change_numbers($dbh, $data["project"], $data["number"]);
 		}
-		$update_sql = "update json_data set name=?, project=?, member=?, memo=?, start=?, end=?, color=?, number=? where id = ?"; 
+		$update_sql = "update json_data set name=?, project=?, member=?, memo=?, start=?, end=?, progress=?, color=?, number=? where id = ?"; 
 
 		$stmt = $dbh->prepare($update_sql);
 		$data = push($id);
