@@ -97,7 +97,7 @@ else{
 	$json_str = $_POST['json'];
     $data = array();
 	$data = json_decode($json_str, true);
-	$id = shift($data);
+	$id = array_shift($data);
 		
 	if ($data['mode'] === 'add'){
 		//チケット追加
