@@ -26,7 +26,7 @@ $(function () {
 	
 	$('#submit').click(function (data) {
 		var record = new Object();
-		record.idd = $("#id > input").attr("value");
+		record.id = $("#id > input").attr("value");
 		record.project = $("#prj > input").attr("value");
 		record.name = $("#name > input").attr("value");
 		record.member = $("#member > input").attr("value");
@@ -36,7 +36,15 @@ $(function () {
 		record.color = $("#color > input").attr("value");
 		
 		var json_text = JSON.stringify(record,"\t");
-		alert(json_text);
+		//alert(json_text);
+		$.ajax({
+			type: "POST",
+			url: "./gantt.php?mode=add",
+			data: json_text;
+			success: function(){
+				alert("ok");
+			}
+		});
 	});
 	// $("#ganttChart").ganttView("setSlideWidth", 600);
 });
