@@ -97,12 +97,12 @@ else{
     $data = array();
 	$data = json_decode($_POST['json'], true);
 	$mode = array_shift($data);
-	var_dump($data);
-/*	if ($mode === 'add'){
+	//var_dump($data);
+	if ($mode === 'add'){
 		//チケット追加
       $add_sql = "insert into json_data name, project, member, memo, start, end, progress, color, number values ?, ?, ?, ?, ?, ?, ?, ?, ?"; 
 	  $stmt = $dbh->prepare($add_sql);
-	  $exec = $stmt->execute($data);
+	  $exec = $stmt->execute($data["name"], $data["project"], $data["member"], $data["memo"], $data["start"], $data["end"], $data["progress"], $data["color"], $data["number"]);
 	}
 	else if ($data['mode'] === 'update'){
 		//チケット更新
@@ -116,7 +116,7 @@ else{
 		$exec = $stmt->execute($data);
 		
 	}
-*/	
+	
 }
 
 function change_numbers($dbh, $prj, $num){

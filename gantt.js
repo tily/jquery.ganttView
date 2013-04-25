@@ -35,6 +35,7 @@ $(function () {
 		record.end = $("#end > input").attr("value");
 		record.progress = $("#progress > input").attr("value");
 		record.color = $("#color > input").attr("value");
+		record.number = 1;
 		
 		var json_text = JSON.stringify(record,"\t");
 		//alert(json_text);
