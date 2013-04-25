@@ -8,6 +8,7 @@ $(function () {
 				$("#prj > input").attr({value : data.project});
 				$("#name > input").attr({value : data.name});
 				$("#member > input").attr({value : data.member});
+				$("#memo > input").attr({value : data.memo});
 				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
 				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
 				$("#progress > input").attr({value : data.progress});
@@ -31,6 +32,7 @@ $(function () {
 		record.project = $("#prj > input").attr("value");
 		record.name = $("#name > input").attr("value");
 		record.member = $("#member > input").attr("value");
+		record.memo = $("#memo > input").attr("value");
 		record.start = $("#start > input").attr("value");
 		record.end = $("#end > input").attr("value");
 		record.progress = $("#progress > input").attr("value");
