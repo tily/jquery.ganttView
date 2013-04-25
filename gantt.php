@@ -101,7 +101,7 @@ else{
 	var_dump($data);
 	if ($mode === 'add'){
 		//チケット追加
-      $add_sql = "insert into json_data name, project, member, memo, start, end, progress, color, number values ?, ?, ?, ?, ?, ?, ?, ?, ?"; 
+      $add_sql = "insert into json_data (name, project, member, memo, start, end, progress, color, number) values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 	  $stmt = $dbh->prepare($add_sql);
 	  $exec = $stmt->execute($data);
 	}
