@@ -41,7 +41,7 @@ $(function () {
 		$.ajax({
 			type: "POST",
 			url: "./gantt.php",
-			data: json_text,
+			data: {"json": json_text},
 			success: function(){
 				alert("ok");
 			}

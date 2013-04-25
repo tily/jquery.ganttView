@@ -94,11 +94,10 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 	}
 }
 else{
-	$json_str = $_POST['json'];
     $data = array();
-	$data = json_decode($json_str, true);
+	$data = json_decode($_POST['json'], true);
 	$mode = array_shift($data);
-	var_dump($mode);
+	var_dump($data);
 /*	if ($mode === 'add'){
 		//チケット追加
       $add_sql = "insert into json_data name, project, member, memo, start, end, progress, color, number values ?, ?, ?, ?, ?, ?, ?, ?, ?"; 
