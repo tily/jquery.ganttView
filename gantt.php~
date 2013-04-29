@@ -121,7 +121,5 @@ else{
 function count_number($dbh, $prj){
 	$count_sql= "select count(*) from json_data where project=". $prj;
 	$result = $dbh->query($count_sql);
-  print "number:";
-  var_dump($result);
 	return $result;
 }
