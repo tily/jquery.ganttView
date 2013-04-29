@@ -107,11 +107,11 @@ else{
 	else if ($mode === 'update'){
 		//number取得
 		
-		count_number($dbh, $data["project"]);
-		$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = ?"; 
+		$data["number"] = count_number($dbh, $data["project"]);
+    	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = :id"; 
 
 		$stmt = $dbh->prepare($update_sql);
-		$data = push($id);
+     	$data["id"] =  $id;
 		$exec = $stmt->execute($data);
 		
 	}
@@ -121,5 +121,7 @@ else{
 function count_number($dbh, $prj){
 	$count_sql= "select count(*) from json_data where project=". $prj;
 	$result = $dbh->query($count_sql);
+  print "number:";
+  var_dump($result);
 	return $result;
 }
