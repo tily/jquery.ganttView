@@ -38,8 +38,7 @@
 			<div id="end">終了日：<input type="text" name="end_date"></div>
 			<div id="progress">進捗：<input type="text" name="progress"></div>
 			<div id="color">色：<input type="text" name="color"></div>
-			<div id="submit"><button type="button">追加</button></div>
-			<div id="update"><button type="button">更新</button></div>
+			<div id="submit"><button type="button">追加</button</div>
 		</form>
 	</div>
 

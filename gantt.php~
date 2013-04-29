@@ -105,9 +105,10 @@ else{
 		$exec = $stmt->execute($data);
 	}
 	else if ($mode === 'update'){
-		//number取得
-		
-		count_number($dbh, $data["project"]);
+		//チケット更新
+		if (isset($data["number"])){
+			change_numbers($dbh, $data["project"], $data["number"]);
+		}
 		$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = ?"; 
 
 		$stmt = $dbh->prepare($update_sql);
