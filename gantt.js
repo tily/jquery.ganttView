@@ -15,6 +15,15 @@ $(function () {
 				$("#color > input").attr({value : data.color});
 			},
 			onResize: function (data) { 
+				$("#id > input").attr({value : data.id});
+				$("#prj > input").attr({value : data.project});
+				$("#name > input").attr({value : data.name});
+				$("#member > input").attr({value : data.member});
+				$("#memo > input").attr({value : data.memo});
+				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
+				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
+				$("#progress > input").attr({value : data.progress});
+				$("#color > input").attr({value : data.color});
 				var record = new Object();
 				record.mode = "update";
 				record.id = $("#id > input").attr("value");
@@ -44,6 +53,15 @@ $(function () {
 				$("#eventMessage").text(msg);
 			},
 			onDrag: function (data) { 
+				$("#id > input").attr({value : data.id});
+				$("#prj > input").attr({value : data.project});
+				$("#name > input").attr({value : data.name});
+				$("#member > input").attr({value : data.member});
+				$("#memo > input").attr({value : data.memo});
+				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
+				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
+				$("#progress > input").attr({value : data.progress});
+				$("#color > input").attr({value : data.color});
 				var record = new Object();
 				record.mode = "update";
 				record.id = $("#id > input").attr("value");
