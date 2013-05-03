@@ -23,7 +23,7 @@ try{
 }
 
 
-if($_SERVER["REQUEST_METHOD"] != "POST"){
+if($_SERVER["REQUEST_METHOD"] === "GET"){
 	//DBを読み込む
 	$data = array();
     $data_json = array();
@@ -93,7 +93,14 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 		print $json_out;
 	}
 }
-else{
+else if ($_SERVER["REQUEST_METHOD"] === "DELETE"){
+	$str = json_decode($_POST{'json'], true);
+	$id = $str['id'];
+	$delete_sql = "delete from json_data where id = :id";
+	$stmt = $dbh->prepare($delete_sql);
+	$exec = $stmt->execute($id);	
+}
+else if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $data = array();
 	$data = json_decode($_POST['json'], true);
 	$mode = array_shift($data);

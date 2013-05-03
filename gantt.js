@@ -73,6 +73,12 @@ function inputRecord(mode){
 	record.number = "1";
 }
 
+$('#delete').click(function () {
+	inputRecord("delete");
+	var json_text = JSON.stringify(record,"\t");
+	postJSON(json_text);
+});
+
 $('#submit').click(function (data) {
 	inputRecord("add");
 	var json_text = JSON.stringify(record,"\t");
@@ -86,4 +92,10 @@ $('#update').click(function (data) {
 	//alert(json_text);
 	postJSON(json_text);
 
+});
+
+$('#up').click(function () {
+});
+
+$('#down').click(function () {
 });
