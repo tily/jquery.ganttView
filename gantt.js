@@ -1,3 +1,5 @@
+var record = new Object();
+
 $(function () {
 	$("#ganttChart").ganttView({ 
 		dataUrl: "./gantt.php?mode=project",
@@ -24,19 +26,7 @@ $(function () {
 				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
 				$("#progress > input").attr({value : data.progress});
 				$("#color > input").attr({value : data.color});
-				var record = new Object();
-				record.mode = "update";
-				record.id = $("#id > input").attr("value");
-				record.project = $("#prj > input").attr("value");
-				record.name = $("#name > input").attr("value");
-				record.member = $("#member > input").attr("value");
-				record.memo = $("#memo > input").attr("value");
-				record.start = data.start.toString("yyyy-M-d");
-				record.end = data.end.toString("yyyy-M-d");
-				record.progress = $("#progress > input").attr("value");
-				record.color = $("#color > input").attr("value");
-				record.number = "1";
-				
+				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
 				//alert(json_text);
 				$.ajax({
@@ -62,19 +52,7 @@ $(function () {
 				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
 				$("#progress > input").attr({value : data.progress});
 				$("#color > input").attr({value : data.color});
-				var record = new Object();
-				record.mode = "update";
-				record.id = $("#id > input").attr("value");
-				record.project = $("#prj > input").attr("value");
-				record.name = $("#name > input").attr("value");
-				record.member = $("#member > input").attr("value");
-				record.memo = $("#memo > input").attr("value");
-				record.start = data.start.toString("yyyy-M-d");
-				record.end = data.end.toString("yyyy-M-d");
-				record.progress = $("#progress > input").attr("value");
-				record.color = $("#color > input").attr("value");
-				record.number = "1";
-				
+				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
 				//alert(json_text);
 				$.ajax({
@@ -93,37 +71,11 @@ $(function () {
 		}
 	});
 	
-	$('#submit').click(function (data) {
-		var record = new Object();
-		record.mode = "add";
-		record.id = $("#id > input").attr("value");
-		record.project = $("#prj > input").attr("value");
-		record.name = $("#name > input").attr("value");
-		record.member = $("#member > input").attr("value");
-		record.memo = $("#memo > input").attr("value");
-		record.start = $("#start > input").attr("value");
-		record.end = $("#end > input").attr("value");
-		record.progress = $("#progress > input").attr("value");
-		record.color = $("#color > input").attr("value");
-		record.number = "1";
-		
-		var json_text = JSON.stringify(record,"\t");
-		$.ajax({
-			type: "POST",
-			url: "./gantt.php",
-			data: {"json": json_text},
-			success: function(){
-				location.reload();
-				//alert("ok");
-			}
-		});
-	});
 
 });
 
-$('#update').click(function (data) {
-	var record = new Object();
-	record.mode = "update";
+function inputRecord(mode){
+	record.mode = mode;
 	record.id = $("#id > input").attr("value");
 	record.project = $("#prj > input").attr("value");
 	record.name = $("#name > input").attr("value");
@@ -134,7 +86,24 @@ $('#update').click(function (data) {
 	record.progress = $("#progress > input").attr("value");
 	record.color = $("#color > input").attr("value");
 	record.number = "1";
-	
+}
+
+$('#submit').click(function (data) {
+	inputRecord("add");
+	var json_text = JSON.stringify(record,"\t");
+	$.ajax({
+		type: "POST",
+		url: "./gantt.php",
+		data: {"json": json_text},
+		success: function(){
+			location.reload();
+			//alert("ok");
+		}
+	});
+});
+
+$('#update').click(function (data) {
+	inputRecord("update");	
 	var json_text = JSON.stringify(record,"\t");
 	//alert(json_text);
 	$.ajax({
