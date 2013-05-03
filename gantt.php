@@ -94,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
 	}
 }
 else if ($_SERVER["REQUEST_METHOD"] === "DELETE"){
-	$str = json_decode($_POST{'json'], true);
+	$str = json_decode($_POST['json'], true);
 	$id = $str['id'];
 	$delete_sql = "delete from json_data where id = :id";
 	$stmt = $dbh->prepare($delete_sql);
