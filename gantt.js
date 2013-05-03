@@ -6,26 +6,12 @@ $(function () {
 		slideWidth: 900,
 		behavior: {
 			onClick: function (data) { 
-				$("#id > input").attr({value : data.id});
-				$("#prj > input").attr({value : data.project});
-				$("#name > input").attr({value : data.name});
-				$("#member > input").attr({value : data.member});
-				$("#memo > input").attr({value : data.memo});
-				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
-				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
-				$("#progress > input").attr({value : data.progress});
-				$("#color > input").attr({value : data.color});
+				appendHTML(data);
+
 			},
 			onResize: function (data) { 
-				$("#id > input").attr({value : data.id});
-				$("#prj > input").attr({value : data.project});
-				$("#name > input").attr({value : data.name});
-				$("#member > input").attr({value : data.member});
-				$("#memo > input").attr({value : data.memo});
-				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
-				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
-				$("#progress > input").attr({value : data.progress});
-				$("#color > input").attr({value : data.color});
+				appendHTML(data);
+
 				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
 				//alert(json_text);
@@ -43,15 +29,7 @@ $(function () {
 				$("#eventMessage").text(msg);
 			},
 			onDrag: function (data) { 
-				$("#id > input").attr({value : data.id});
-				$("#prj > input").attr({value : data.project});
-				$("#name > input").attr({value : data.name});
-				$("#member > input").attr({value : data.member});
-				$("#memo > input").attr({value : data.memo});
-				$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
-				$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
-				$("#progress > input").attr({value : data.progress});
-				$("#color > input").attr({value : data.color});
+				appendHTML(data);
 				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
 				//alert(json_text);
@@ -73,6 +51,17 @@ $(function () {
 	
 
 });
+function appendHTML(data){
+	$("#id > input").attr({value : data.id});
+	$("#prj > input").attr({value : data.project});
+	$("#name > input").attr({value : data.name});
+	$("#member > input").attr({value : data.member});
+	$("#memo > input").attr({value : data.memo});
+	$("#start > input").attr({value : data.start.toString("yyyy-M-d")});
+	$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
+	$("#progress > input").attr({value : data.progress});
+	$("#color > input").attr({value : data.color});
+}
 
 function inputRecord(mode){
 	record.mode = mode;
