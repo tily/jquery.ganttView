@@ -15,15 +15,8 @@ $(function () {
 				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
 				//alert(json_text);
-				$.ajax({
-					type: "POST",
-					url: "./gantt.php",
-					data: {"json": json_text},
-					success: function(){
-						location.reload();
-						//alert("ok");
-					}
-				});
+				postJSON(json_text);
+
 
 				//var msg = "You resized an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 				$("#eventMessage").text(msg);
@@ -32,17 +25,7 @@ $(function () {
 				appendHTML(data);
 				inputRecord("update");
 				var json_text = JSON.stringify(record,"\t");
-				//alert(json_text);
-				$.ajax({
-					type: "POST",
-					url: "./gantt.php",
-					data: {"json": json_text},
-					success: function(){
-						location.reload();
-						//alert("ok");
-					}
-				});
-
+				postJSON(json_text);
 				//var msg = "You dragged an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 				$("#eventMessage").text(msg);
 			}
@@ -51,6 +34,19 @@ $(function () {
 	
 
 });
+
+function postJSON(json_text){
+	$.ajax({
+		type: "POST",
+		url: "./gantt.php",
+		data: {"json": json_text},
+		success: function(){
+			location.reload();
+			//alert("ok");
+		}
+	});
+}
+
 function appendHTML(data){
 	$("#id > input").attr({value : data.id});
 	$("#prj > input").attr({value : data.project});
@@ -80,28 +76,14 @@ function inputRecord(mode){
 $('#submit').click(function (data) {
 	inputRecord("add");
 	var json_text = JSON.stringify(record,"\t");
-	$.ajax({
-		type: "POST",
-		url: "./gantt.php",
-		data: {"json": json_text},
-		success: function(){
-			location.reload();
-			//alert("ok");
-		}
-	});
+	postJSON(json_text);
+
 });
 
 $('#update').click(function (data) {
 	inputRecord("update");	
 	var json_text = JSON.stringify(record,"\t");
 	//alert(json_text);
-	$.ajax({
-		type: "POST",
-		url: "./gantt.php",
-		data: {"json": json_text},
-		success: function(){
-			location.reload();
-			//alert("ok");
-		}
-	});
+	postJSON(json_text);
+
 });
