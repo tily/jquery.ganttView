@@ -7,25 +7,16 @@ $(function () {
 		behavior: {
 			onClick: function (data) { 
 				appendHTML(data);
-
 			},
 			onResize: function (data) { 
 				appendHTML(data);
-
-				inputRecord("update");
-				var json_text = JSON.stringify(record,"\t");
-				//alert(json_text);
-				postJSON(json_text);
-
-
+				editRecord("update");
 				//var msg = "You resized an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 				$("#eventMessage").text(msg);
 			},
 			onDrag: function (data) { 
 				appendHTML(data);
-				inputRecord("update");
-				var json_text = JSON.stringify(record,"\t");
-				postJSON(json_text);
+				editRecord("update");
 				//var msg = "You dragged an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 				$("#eventMessage").text(msg);
 			}
@@ -35,9 +26,10 @@ $(function () {
 
 });
 
-function postJSON(json_text){
+function sendJSON(method){
+	var json_text = JSON.stringify(record,"\t");
 	$.ajax({
-		type: "POST",
+		type: method,
 		url: "./gantt.php",
 		data: {"json": json_text},
 		success: function(){
@@ -59,7 +51,7 @@ function appendHTML(data){
 	$("#color > input").attr({value : data.color});
 }
 
-function inputRecord(mode){
+function editRecord(mode){
 	record.mode = mode;
 	record.id = $("#id > input").attr("value");
 	record.project = $("#prj > input").attr("value");
@@ -71,27 +63,20 @@ function inputRecord(mode){
 	record.progress = $("#progress > input").attr("value");
 	record.color = $("#color > input").attr("value");
 	record.number = "1";
+
+	sendJSON(record.mode);
 }
 
 $('#delete').click(function () {
-	inputRecord("delete");
-	var json_text = JSON.stringify(record,"\t");
-	postJSON(json_text);
+	editRecord("delete");
 });
 
 $('#submit').click(function (data) {
-	inputRecord("add");
-	var json_text = JSON.stringify(record,"\t");
-	postJSON(json_text);
-
+	editRecord("add");
 });
 
 $('#update').click(function (data) {
-	inputRecord("update");	
-	var json_text = JSON.stringify(record,"\t");
-	//alert(json_text);
-	postJSON(json_text);
-
+	editRecord("update");	
 });
 
 $('#up').click(function () {
