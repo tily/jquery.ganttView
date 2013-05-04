@@ -26,8 +26,16 @@ $(function () {
 
 });
 
-function sendJSON(method){
+function sendJSON(mode){
 	var json_text = JSON.stringify(record,"\t");
+	
+	if (mode === 'update' || mode === 'add'){
+		var method = "POST";
+	}
+	else if (mode === 'delete'){
+		var method = "DELETE";
+	}
+
 	$.ajax({
 		type: method,
 		url: "./gantt.php",
