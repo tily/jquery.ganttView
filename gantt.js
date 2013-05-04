@@ -49,6 +49,7 @@ function appendHTML(data){
 	$("#end > input").attr({value : data.end.toString("yyyy-M-d")});
 	$("#progress > input").attr({value : data.progress});
 	$("#color > input").attr({value : data.color});
+	$("#number > input").attr({value : data.number});
 }
 
 function editRecord(mode){
@@ -62,7 +63,7 @@ function editRecord(mode){
 	record.end = $("#end > input").attr("value");
 	record.progress = $("#progress > input").attr("value");
 	record.color = $("#color > input").attr("value");
-	record.number = "1";
+	record.number = $("#number > input").attr("value");
 
 	sendJSON(record.mode);
 }
