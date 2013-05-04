@@ -28,16 +28,8 @@ $(function () {
 
 function sendJSON(mode){
 	var json_text = JSON.stringify(record,"\t");
-	
-	if (mode === 'update' || mode === 'add'){
-		var method = "POST";
-	}
-	else if (mode === 'delete'){
-		var method = "DELETE";
-	}
-
 	$.ajax({
-		type: method,
+		type: "POST",
 		url: "./gantt.php",
 		data: {"json": json_text},
 		success: function(){
