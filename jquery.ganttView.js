@@ -246,7 +246,7 @@ behavior: {
                         block.css("background-color", data[i].series[j].color);
                     }
                     block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
-                    rowIdx = parseInt(data[i].series[j].number);
+                    rowIdx = parseInt(data[i].series[j].number) - 1;
 					jQuery(rows[rowIdx]).append(block);
                     //rowIdx = rowIdx + 1;
                 }
