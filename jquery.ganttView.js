@@ -218,13 +218,20 @@ behavior: {
             }
             div.append(blocksDiv);
         }
-
+		
+		//addBlocks
         function addBlocks(div, data, cellWidth, start) {
             var rows = jQuery("div.ganttview-blocks div.ganttview-block-container", div);
             var rowIdx = 0;
             for (var i = 0; i < data.length; i++) {
                 for (var j = 0; j < data[i].series.length; j++) {
-                    var series = data[i].series[j];
+                    for (var n = 0; n < data[i].series.length; n++){
+						if (j == intval(data[i].series[n].number){
+							var series = data[i].series[n];
+							break;
+						}
+					}
+
                     var size = DateUtils.daysBetween(series.start, series.end) + 1;
 					var offset = DateUtils.daysBetween(start, series.start);
 					var block = jQuery("<div>", {
@@ -239,7 +246,7 @@ behavior: {
                     if (data[i].series[j].color) {
                         block.css("background-color", data[i].series[j].color);
                     }
-                    block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(size));
+                    block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
                     jQuery(rows[rowIdx]).append(block);
                     rowIdx = rowIdx + 1;
                 }

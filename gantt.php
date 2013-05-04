@@ -120,6 +120,7 @@ else {
 		$id = $record['id'];
 		$delete_sql = "delete from json_data where id = :id";
 		$stmt = $dbh->prepare($delete_sql);
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$exec = $stmt->execute($id);
 	}	
 }
