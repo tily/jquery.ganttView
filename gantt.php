@@ -117,7 +117,19 @@ else {
 	}
 	else if ($mode === 'delete'){
 		$record = json_decode($_POST['json'], true);
-		$id = $record['id'];
+		$id = $record['id']
+		$number = $record['number'];
+
+		$row_num = count_number($dbh);
+		for ($i = $number + 1; $i <= $row_num; $i++){
+			$update_num_sql = "update json_data set number= :number where number= :oldNumber";
+			$stmt = $dbh->prepare($update_num_sql);
+			$stmt->bindValue(':number', $i, PDO::PARAM_INT);
+			$stmt->bindValue(':oldNumber', ($i - 1), PDO::PARAM_INT);
+			$exec = $stmt->execute();
+		}
+
+
 		$delete_sql = "delete from json_data where id = :id";
 		$stmt = $dbh->prepare($delete_sql);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
