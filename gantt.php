@@ -100,7 +100,7 @@ else {
 	$id = array_shift($data);
 	if ($mode === 'add'){
 		//チケット追加
-		$data['number'] = count_number($dbh);
+		$data['number'] = strval(count_number($dbh));
 		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number)"; 
 		$stmt = $dbh->prepare($add_sql);
 		$exec = $stmt->execute($data);
@@ -117,8 +117,8 @@ else {
 	}
 	else if ($mode === 'delete'){
 		$record = json_decode($_POST['json'], true);
-		$id = $record['id']
-		for ($i = $record['number'] + 1; $i <= count_number($dbh); $i++){
+		$id = $record['id'];
+		for ($i = $record['number'] + 1; $i <= intval(count_number($dbh)); $i++){
 			$update_num_sql = "update json_data set number= :number where number= :oldNumber";
 			$stmt = $dbh->prepare($update_num_sql);
 			$stmt->bindValue(':number', $i, PDO::PARAM_INT);
