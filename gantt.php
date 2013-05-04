@@ -97,7 +97,8 @@ else {
     $data = array();
 	$data = json_decode($_POST['json'], true);
 	$mode = array_shift($data);
-    $id = array_shift($data);
+	$id = array_shift($data);
+	$data['number'] = count_number($dbh);
 	if ($mode === 'add'){
 		//チケット追加
 		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number)"; 
@@ -107,7 +108,6 @@ else {
 	else if ($mode === 'update'){
 		//number取得
 		
-		$data["number"] = count_number($dbh, $data["project"]);
     	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = :id"; 
 
 		$stmt = $dbh->prepare($update_sql);
@@ -121,12 +121,12 @@ else {
 		$delete_sql = "delete from json_data where id = :id";
 		$stmt = $dbh->prepare($delete_sql);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
-		$exec = $stmt->execute($id);
+		$exec = $stmt->execute();
 	}	
 }
 
-function count_number($dbh, $prj){
-	$count_sql= "select count(*) from json_data where project=". $prj;
+function count_number($dbh){
+	$count_sql= "select count(*) from json_data ";
 	$result = $dbh->query($count_sql);
 	return $result;
 }
