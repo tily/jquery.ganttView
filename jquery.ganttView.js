@@ -140,7 +140,8 @@ behavior: {
 		//VzHeader:tickets part
         function addVtHeader(div, data, cellHeight) {
             var headerDiv = jQuery("<div>", { "class": "ganttview-vtheader" });
-            for (var i = 0; i < data.length; i++) {
+            var idx = 0;
+			for (var i = 0; i < data.length; i++) {
                 var itemDiv = jQuery("<div>", { "class": "ganttview-vtheader-item" });
                 itemDiv.append(jQuery("<div>", {
                     "class": "ganttview-vtheader-item-name",
@@ -149,11 +150,12 @@ behavior: {
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
 					for (var n = 0; n < data[i].series.length; n++){
-						if (j + 1 == parseInt(data[i].series[n].number)){
+						if (idx + 1 == parseInt(data[i].series[n].number)){
     		                seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" }).append(data[i].series[n].name))
             	            .append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" }).append(data[i].series[n].memo))
 							.append(jQuery("<div>", { "class": "ganttview-vtheader-series-member" }).append(data[i].series[n].member));
-                		}
+                			idx++;
+						}
 					}
 				}
                 itemDiv.append(seriesDiv);
