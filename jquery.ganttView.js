@@ -225,12 +225,7 @@ behavior: {
             var rowIdx = 0;
             for (var i = 0; i < data.length; i++) {
                 for (var j = 0; j < data[i].series.length; j++) {
-                    for (var n = 0; n < data[i].series.length; n++){
-						if (j == intval(data[i].series[n].number){
-							var series = data[i].series[n];
-							break;
-						}
-					}
+					var series = data[i].series[j];
 
                     var size = DateUtils.daysBetween(series.start, series.end) + 1;
 					var offset = DateUtils.daysBetween(start, series.start);
@@ -247,8 +242,9 @@ behavior: {
                         block.css("background-color", data[i].series[j].color);
                     }
                     block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
-                    jQuery(rows[rowIdx]).append(block);
-                    rowIdx = rowIdx + 1;
+                    rowIdx = parseInt(data[i].series[j].number);
+					jQuery(rows[rowIdx]).append(block);
+                    //rowIdx = rowIdx + 1;
                 }
             }
         }
