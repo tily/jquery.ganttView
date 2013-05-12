@@ -146,6 +146,7 @@ div.ganttview-block-text {
 	font-size: 0.8em;
 	color: #999;
 	padding: 2px 3px;
+	float: left;
 }
 
 
