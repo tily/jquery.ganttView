@@ -250,7 +250,7 @@ behavior: {
                     block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
 					if (data[i].series[j].milestone) {
 						var mileOffset = DateUtils.daysBetween(data[i].series[j].end, data[i].series[j].miledate);
-						blockappend(jQuery("<div>", {
+						block.append(jQuery("<div>", {
 							"class": "ganttview-block-milestone",
 							"css": {
 								"margin-left": ((mileOffset * cellWidth) + 3) + "px"
