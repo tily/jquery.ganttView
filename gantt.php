@@ -101,7 +101,7 @@ else {
 	if ($mode === 'add'){
 		//チケット追加
 		$number = count_number($dbh);
-		$data['number']	= strval($number);
+		$data['number']	= strval($number + 1);
 		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number)"; 
 		$stmt = $dbh->prepare($add_sql);
 		$exec = $stmt->execute($data);
@@ -121,7 +121,7 @@ else {
 		$id = $record['id'];
 		$num = $record['number'];
 		$row_num = count_number($dbh);
-		for ($i = $num + 1; $i <= $row_num; $i++){
+		for ($i = $num; $i <= $row_num; $i++){
 			$update_num_sql = "update json_data set number= :number where number= :oldNumber";
 			$stmt = $dbh->prepare($update_num_sql);
 			$stmt->bindValue(':number', $i, PDO::PARAM_INT);
