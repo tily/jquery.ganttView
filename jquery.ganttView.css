@@ -149,6 +149,10 @@ div.ganttview-block-text {
 	float: left;
 }
 
+div.ganttview-block-milestone {
+	position: absolute;
+}
+
 
 /* Adjustments for jQuery UI Styling */
 

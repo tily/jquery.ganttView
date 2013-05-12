@@ -249,13 +249,13 @@ behavior: {
                     }
                     block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
 					if (data[i].series[j].milestone) {
-						var mileOffset = DateUtils.daysBetween(data[i].series[j].end, data[i].series[j].miledate);
+						var mileOffset = DateUtils.daysBetween(data[i].series[j].start, data[i].series[j].miledate);
 						block.append(jQuery("<div>", {
 							"class": "ganttview-block-milestone",
 							"css": {
 								"margin-left": ((mileOffset * cellWidth) + 3) + "px"
 							}
-						}).text("Å¢"));
+						}).text("Å¢" + data[i].series[j].milestone));
 					//	$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text(data[i].series[j].milestone);
 					}
                     rowIdx = parseInt(data[i].series[j].number) - 1;
