@@ -255,7 +255,7 @@ behavior: {
 							"css": {
 								"margin-left": ((mileOffset * cellWidth) + 3) + "px"
 							}
-						}).text("Å¢");
+						}).text("Å¢"));
 					//	$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text(data[i].series[j].milestone);
 					}
                     rowIdx = parseInt(data[i].series[j].number) - 1;
