@@ -102,14 +102,14 @@ else {
 		//チケット追加
 		$number = count_number($dbh);
 		$data['number']	= strval($number + 1);
-		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number)"; 
+		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number , :milestone, :miledate)"; 
 		$stmt = $dbh->prepare($add_sql);
 		$exec = $stmt->execute($data);
 	}
 	else if ($mode === 'update'){
 		//number取得
 		
-    	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = :id"; 
+    	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number, milestone= :milestone, miledate= :miledate where id = :id"; 
 
 		$stmt = $dbh->prepare($update_sql);
      	$data["id"] =  $id;

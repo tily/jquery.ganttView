@@ -50,6 +50,8 @@ function appendHTML(data){
 	$("#progress > input").attr({value : data.progress});
 	$("#color > input").attr({value : data.color});
 	$("#number > input").attr({value : data.number});
+	$("#milestone > input").attr({value : data.milestone});
+	$("#miledate > input").attr({value : data.miledate});
 }
 
 function editRecord(mode){
@@ -64,6 +66,8 @@ function editRecord(mode){
 	record.progress = $("#progress > input").attr("value");
 	record.color = $("#color > input").attr("value");
 	record.number = $("#number > input").attr("value");
+	record.milestone = $("#milestone > input").attr("value");
+	record.miledate = $("#miledate > input").attr("value");
 
 	sendJSON(record.mode);
 }

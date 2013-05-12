@@ -247,6 +247,12 @@ behavior: {
                     if (data[i].series[j].color) {
                         block.css("background-color", data[i].series[j].color);
                     }
+					if (data[i].series[j].milestone) {
+						var mileOffset = DateUtils.daysBetween(start, data[i].series[j].miledate);
+						var mileRowIdx = rowIdx + 1;
+						$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text("Å¢");
+					//	$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text(data[i].series[j].milestone);
+					}
                     block.append(jQuery("<div>", { "class": "ganttview-block-text" }).text(data[i].series[j].progress + "%"));
                     rowIdx = parseInt(data[i].series[j].number) - 1;
 					jQuery(rows[rowIdx]).append(block);
