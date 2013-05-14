@@ -277,7 +277,7 @@ behavior: {
 		return {
 			render: render
 		};
-	}
+	
 
 	var Behavior = function (div, opts) {
 		
