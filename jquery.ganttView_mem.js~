@@ -255,7 +255,7 @@ behavior: {
 					}
                     //rowIdx = parseInt(data[i].series[j].number) - 1;
                     rowIdx = rowIdx + 1;
-	      	    jQuery(rows[rowIdx]).append(block);
+	      	    	jQuery(rows[rowIdx]).append(block);
                 }
             }
         }
