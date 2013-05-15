@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ï»¿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
 
 <html lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 	<link rel="stylesheet" type="text/css" href="./lib/jquery-ui-1.8.4.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
 	<link rel="stylesheet" type="text/css" href="./jquery.ganttView.css" />
@@ -18,33 +19,33 @@
 <body>
 	<h1>jQuery Gantt_test</h1>
 	<div id="sort">
-		<a href="./index.html">ƒvƒƒWƒFƒNƒg•Ê•\Ž¦</a>
-		<a href="./index_mem.html">’S“–ŽÒ•Ê•\Ž¦</a>
-		<button id="up" type="button">ã‚Ö</button>
-		<button id="down" type="button">‰º‚Ö</button>
+		<a href="./index.html">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåˆ¥è¡¨ç¤º</a>
+		<a href="./index_mem.html">æ‹…å½“è€…åˆ¥è¡¨ç¤º</a>
+		<button id="up" type="button">ä¸Šã¸</button>
+		<button id="down" type="button">ä¸‹ã¸</button>
 	</div>
 	<div id="ganttChart"></div>
 	<br/><br/>
-	<div id="new_tickets"><button type="button">V‹K</button></div>
+	<div id="new_tickets"><button type="button">æ–°è¦</button></div>
 	<div id="eventMessage"></div>
 	<div id="dialog">
 		<form action="" method="GET">
 			<div id="id">id:<input type="text" name="id"></div>
-			<div id="prj">ƒvƒƒWƒFƒNƒg–¼:<input type="text" name="project_new"></div>
-			<div id="name">ƒ`ƒPƒbƒg–¼F<input type="text" name="ticket_name"></div>
-			<div id="member">’S“–ŽÒF<input type="text" name="assignment"></div>
-			<div id="memo">ƒƒ‚F<input type="text" name="memo"></div>
-			<div id="start">ŠJŽn“úF<input type="text" name="start_date"></div>
-			<div id="end">I—¹“úF<input type="text" name="end_date"></div>
-			<div id="progress">i’»F<input type="text" name="progress"></div>
-			<div id="color">FF<input type="text" name="color"></div>
-			<div id="number">”Ô†F<input type="text" name="number"></div>
-			<div id="milestone">ƒ}ƒCƒ‹ƒXƒg[ƒ“F<input type="text" name="milestone"></div>
-			<div id="miledate">ƒ}ƒCƒ‹ƒXƒg[ƒ“‚ÌŠúŒÀF<input type="text" name="miledate"></div>
+			<div id="prj">ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆå:<input type="text" name="project_new"></div>
+			<div id="name">ãƒã‚±ãƒƒãƒˆåï¼š<input type="text" name="ticket_name"></div>
+			<div id="member">æ‹…å½“è€…ï¼š<input type="text" name="assignment"></div>
+			<div id="memo">ãƒ¡ãƒ¢ï¼š<input type="text" name="memo"></div>
+			<div id="start">é–‹å§‹æ—¥ï¼š<input type="text" name="start_date"></div>
+			<div id="end">çµ‚äº†æ—¥ï¼š<input type="text" name="end_date"></div>
+			<div id="progress">é€²æ—ï¼š<input type="text" name="progress"></div>
+			<div id="color">è‰²ï¼š<input type="text" name="color"></div>
+			<div id="number">ç•ªå·ï¼š<input type="text" name="number"></div>
+			<div id="milestone">ãƒžã‚¤ãƒ«ã‚¹ãƒˆãƒ¼ãƒ³ï¼š<input type="text" name="milestone"></div>
+			<div id="miledate">ãƒžã‚¤ãƒ«ã‚¹ãƒˆãƒ¼ãƒ³ã®æœŸé™ï¼š<input type="text" name="miledate"></div>
 
-			<div id="submit"><button type="button">’Ç‰Á</button></div>
-			<div id="update"><button type="button">XV</button></div>
-			<div id="delete"><button type="button">íœ</button></div>
+			<div id="submit"><button type="button">è¿½åŠ </button></div>
+			<div id="update"><button type="button">æ›´æ–°</button></div>
+			<div id="delete"><button type="button">å‰Šé™¤</button></div>
 
 		</form>
 	</div>
