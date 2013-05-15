@@ -18,8 +18,8 @@
 <body>
 	<h1>jQuery Gantt_test</h1>
 	<div id="sort">
-		<a href="./index.html">プロジェクト別表示</a>
-		<a href="./index_mem.html">担当者別表示</a>
+		<button type="button">プロジェクト別表示</button>
+		<button type="button">担当者別表示</button>
 		<button id="up" type="button">上へ</button>
 		<button id="down" type="button">下へ</button>
 	</div>
@@ -52,7 +52,7 @@
 	<script type="text/javascript" src="./lib/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="./lib/date.js"></script>
 	<script type="text/javascript" src="./lib/jquery-ui-1.8.4.js"></script>
-	<script type="text/javascript" src="./jquery.ganttView.js"></script>
-	<script type="text/javascript" src="./gantt.js"></script>
+	<script type="text/javascript" src="./jquery.ganttView_mem.js"></script>
+	<script type="text/javascript" src="./gantt_mem.js"></script>
 </body>
 </html>

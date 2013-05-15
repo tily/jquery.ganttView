@@ -252,9 +252,9 @@ behavior: {
 						}).text("Å¢" + data[i].series[j].milestone));
 					//	$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text(data[i].series[j].milestone);
 					}
-                    //rowIdx = parseInt(data[i].series[j].number) - 1;
+                    rowIdx = parseInt(data[i].series[j].number) - 1;
 					jQuery(rows[rowIdx]).append(block);
-                    rowIdx = rowIdx + 1;
+                    //rowIdx = rowIdx + 1;
                 }
             }
         }
