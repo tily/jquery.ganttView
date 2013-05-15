@@ -145,7 +145,7 @@ behavior: {
                 itemDiv.append(jQuery("<div>", {
                     "class": "ganttview-vtheader-item-name",
                     "css": { "height": (data[i].series.length * cellHeight) + "px" }
-                }).append(data[i].project));
+                }).append(data[i].member));
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
     		        seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" }).append(data[i].series[j].name))
@@ -253,8 +253,8 @@ behavior: {
 					//	$(".ganttview-grid-row:eq(mileRowIdx) .ganttview-grid-row-cell:eq(mileOffset)").text(data[i].series[j].milestone);
 					}
                     //rowIdx = parseInt(data[i].series[j].number) - 1;
-                    rowIdx = rowIdx + 1;
 					jQuery(rows[rowIdx]).append(block);
+                    rowIdx = rowIdx + 1;
                 }
             }
         }
