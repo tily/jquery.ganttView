@@ -145,13 +145,12 @@ behavior: {
                 itemDiv.append(jQuery("<div>", {
                     "class": "ganttview-vtheader-item-name",
                     "css": { "height": (data[i].series.length * cellHeight) + "px" }
-                }).append(data[i].member));
+                }).append(data[i].project));
                 var seriesDiv = jQuery("<div>", { "class": "ganttview-vtheader-series" });
                 for (var j = 0; j < data[i].series.length; j++) {
-                    seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" }).append(data[i].series[n].name))
-      	            .append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" }).append(data[i].series[n].memo))
-					.append(jQuery("<div>", { "class": "ganttview-vtheader-series-member" }).append(data[i].series[n].member));
-					}
+    		        seriesDiv.append(jQuery("<div>", { "class": "ganttview-vtheader-series-name" }).append(data[i].series[j].name))
+            	    .append(jQuery("<div>", { "class": "ganttview-vtheader-series-memo" }).append(data[i].series[j].memo))
+					.append(jQuery("<div>", { "class": "ganttview-vtheader-series-member" }).append(data[i].series[j].member));
 				}
                 itemDiv.append(seriesDiv);
                 headerDiv.append(itemDiv);
@@ -255,7 +254,7 @@ behavior: {
 					}
                     //rowIdx = parseInt(data[i].series[j].number) - 1;
                     rowIdx = rowIdx + 1;
-	      	    	jQuery(rows[rowIdx]).append(block);
+					jQuery(rows[rowIdx]).append(block);
                 }
             }
         }
