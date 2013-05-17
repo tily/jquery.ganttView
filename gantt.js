@@ -1,6 +1,80 @@
 var record = new Object();
 
 $(function () {
+        //-----[models]------------------------------
+        var Project = Backbone.Model.extend({
+                urlRoot: "/projects"
+        });
+        var Task = Backbone.Model.extend({
+                initialize: function(project) {
+                      this.project = project;
+                }
+        });
+
+        //-----[collections]------------------------------
+        var Projects = Backbone.Collection.extend({
+                model: Project,
+                url: "/projects"
+        });
+        var Tasks = Backbone.Collection.extend({
+                model: Task
+        });
+
+        //-----[views]------------------------------
+        var ProjectView = Backbone.View.extend({
+                tagName: "li",
+                template: _.template($('#project-template').html()),
+                render: function() {
+                        this.$el.html(this.template(this.model.toJSON()));
+                        return this;
+                }
+        });
+        var TaskView = Backbone.View.extend({
+        });
+        var ProjectsView = Backbone.View.extend({
+                el: $("#projects"),
+                events: {
+                        "click .add": "add",
+                        "click .delete": "delete"
+                },
+                initialize: function() {
+                        this.input = this.$(".name");
+                        this.listenTo(projects, 'add', this.onAdd);
+                        this.listenTo(projects, 'delete', this.onDelete);
+                        projects.fetch();
+                },
+                add: function(e) {
+                        projects.create({name: this.input.val()});
+                        this.input.val("");
+                },
+                onAdd: function(project) {
+                        var projectView = new ProjectView({model: project}); 
+                        this.$(".list").append(projectView.render().el);
+                },
+                delete: function(e) {
+                },
+                onDelete: function(project) {
+                }
+        });
+        var TasksView = Backbone.View.extend({
+        });
+
+        //-----[controllers]------------------------------
+
+        //var Router = Backbone.Router.extend({
+        //        routes: {
+        //          "": "projects"
+        //        },
+        //        projects: function() {
+        //        }
+        //});
+
+        //-----[main]------------------------------
+        //var router = new Router();
+
+        var projects = new Projects();
+        var projectsView = new ProjectsView();
+
 	$("#ganttChart").ganttView({ 
 		dataUrl: "./gantt.php?mode=project",
 		slideWidth: 900,
@@ -22,7 +96,6 @@ $(function () {
 			}
 		}
 	});
-	
 
 });
 
