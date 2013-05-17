@@ -151,7 +151,6 @@ div.ganttview-block-text {
 
 div.ganttview-block-milestone {
 	position: absolute;
-	width:200px;
 }
 
 

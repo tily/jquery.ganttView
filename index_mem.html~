@@ -52,7 +52,7 @@
 	<script type="text/javascript" src="./lib/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="./lib/date.js"></script>
 	<script type="text/javascript" src="./lib/jquery-ui-1.8.4.js"></script>
-	<script type="text/javascript" src="./jquery.ganttView.js"></script>
-	<script type="text/javascript" src="./gantt.js"></script>
+	<script type="text/javascript" src="./jquery.ganttView_mem.js"></script>
+	<script type="text/javascript" src="./gantt_mem.js"></script>
 </body>
 </html>

@@ -102,7 +102,7 @@ else {
 		//チケット追加
 		$number = count_number($dbh);
 		$data['number']	= strval($number + 1);
-		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number , :milestone, :miledate)"; 
+		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number, milestone, miledate) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number , :milestone, :miledate)"; 
 		$stmt = $dbh->prepare($add_sql);
 		$exec = $stmt->execute($data);
 	}

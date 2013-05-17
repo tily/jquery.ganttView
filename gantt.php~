@@ -93,33 +93,52 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 		print $json_out;
 	}
 }
-else{
+else {
     $data = array();
 	$data = json_decode($_POST['json'], true);
 	$mode = array_shift($data);
-    $id = array_shift($data);
+	$id = array_shift($data);
 	if ($mode === 'add'){
 		//チケット追加
-		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number)"; 
+		$number = count_number($dbh);
+		$data['number']	= strval($number + 1);
+		$add_sql = "insert into json_data (project, name, member, memo, start, end, progress, color, number, milestone, miledate) values (:project, :name, :member, :memo, :start, :end, :progress, :color, :number , :milestone, :miledate)"; 
 		$stmt = $dbh->prepare($add_sql);
 		$exec = $stmt->execute($data);
 	}
 	else if ($mode === 'update'){
 		//number取得
 		
-		$data["number"] = count_number($dbh, $data["project"]);
-    	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number where id = :id"; 
+    	$update_sql = "update json_data set project= :project, name= :name, member= :member, memo= :memo, start= :start, end= :end, progress= :progress, color= :color, number= :number, milestone= :milestone, miledate= :miledate where id = :id"; 
 
 		$stmt = $dbh->prepare($update_sql);
      	$data["id"] =  $id;
 		$exec = $stmt->execute($data);
 		
 	}
-	
+	else if ($mode === 'delete'){
+		$record = json_decode($_POST['json'], true);
+		$num = $record['number'];
+		$row_num = count_number($dbh);
+		for ($i = $num; $i <= $row_num; $i++){
+			$update_num_sql = "update json_data set number= :number where number= :oldNumber";
+			$stmt = $dbh->prepare($update_num_sql);
+			$stmt->bindValue(':number', ($i - 1), PDO::PARAM_INT);
+			$stmt->bindValue(':oldNumber', $i, PDO::PARAM_INT);
+			$exec = $stmt->execute();
+		}
+
+
+		$delete_sql = "delete from json_data where id = :id";
+		$stmt = $dbh->prepare($delete_sql);
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$exec = $stmt->execute();
+	}	
 }
 
-function count_number($dbh, $prj){
-	$count_sql= "select count(*) from json_data where project=". $prj;
-	$result = $dbh->query($count_sql);
-	return $result;
+function count_number($dbh){
+	$count_sql= "select count(*) from json_data ";
+	$sth = $dbh->query($count_sql);
+	$result = $sth->fetch(PDO::FETCH_NUM);
+	return $result[0];
 }
