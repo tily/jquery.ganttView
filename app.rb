@@ -6,7 +6,7 @@ require 'mongomapper_id2'
 ## Models
 class Project
   include MongoMapper::Document
-  has_many :task
+  many :tasks
   auto_increment! :override => true
 end
 
@@ -38,6 +38,11 @@ before do
   content_type 'application/json'
 end
 
+get '/' do
+  content_type 'text/html'
+  send_file 'index.html'
+end
+
 get '/projects' do
   projects = Project.all
   projects.to_json
@@ -45,7 +50,8 @@ end
 
 post '/projects' do
   logger.info json_data
-  Project.create!(json_data)
+  project = Project.create!(json_data)
+  project.to_json
 end
 
 put '/projects/:id' do
