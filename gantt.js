@@ -6,8 +6,8 @@ $(function () {
                 urlRoot: "/projects"
         });
         var Task = Backbone.Model.extend({
-                initialize: function(project) {
-                      this.project = project;
+                initialize: function(options) {
+                      this.project = options.project;
                 }
         });
 
@@ -17,7 +17,13 @@ $(function () {
                 url: "/projects"
         });
         var Tasks = Backbone.Collection.extend({
-                model: Task
+                model: Task,
+                url: function() {
+                  return "/projects/" + this.project.id;
+                },
+                initialize: function(options) {
+                        this.project = options.project;
+                }
         });
 
         //-----[views]------------------------------
@@ -30,6 +36,12 @@ $(function () {
                 }
         });
         var TaskView = Backbone.View.extend({
+                tagName: "li",
+                template: _.template($('#task-template').html()),
+                render: function() {
+                        this.$el.html(this.template(this.model.toJSON()));
+                        return this;
+                }
         });
         var ProjectsView = Backbone.View.extend({
                 el: $("#projects"),
@@ -37,14 +49,15 @@ $(function () {
                         "click .add": "add",
                         "click .delete": "delete"
                 },
-                initialize: function() {
+                initialize: function(projects) {
+                        this.projects = projects;
                         this.input = this.$(".name");
                         this.listenTo(projects, 'add', this.onAdd);
                         this.listenTo(projects, 'delete', this.onDelete);
-                        projects.fetch();
+                        this.projects.fetch();
                 },
                 add: function(e) {
-                        projects.create({name: this.input.val()});
+                        this.projects.create({name: this.input.val()}, {wait: true});
                         this.input.val("");
                 },
                 onAdd: function(project) {
@@ -57,23 +70,42 @@ $(function () {
                 }
         });
         var TasksView = Backbone.View.extend({
+                el: $("#projects"),
+                events: {
+                        "click .add": "add"
+                },
+                initialize: function() {
+                        this.input = this.$(".name");
+                        this.listenTo(tasks, 'add', this.onAdd);
+                        tasks.fetch();
+                },
+                add: function(e) {
+                        projects.create({name: this.input.val()});
+                        this.input.val("");
+                }
         });
 
         //-----[controllers]------------------------------
 
-        //var Router = Backbone.Router.extend({
-        //        routes: {
-        //          "": "projects"
-        //        },
-        //        projects: function() {
-        //        }
-        //});
+        var Router = Backbone.Router.extend({
+                routes: {
+                  "": "projects",
+                  ":project_id": "projectTasks"
+                },
+                projects: function() {
+                        this._projects = new Projects();
+                        projectsView = new ProjectsView(this._projects);
+                },
+                projectTasks: function(projectId) {
+                        var project = this._projects.get(projectId);
+                        tasks = new Tasks({project: project});
+                        tasksView = new TasksView(tasks);
+                }
+        });
 
         //-----[main]------------------------------
-        //var router = new Router();
-
-        var projects = new Projects();
-        var projectsView = new ProjectsView();
+        new Router();
+        Backbone.history.start();
 
 	$("#ganttChart").ganttView({ 
 		dataUrl: "./gantt.php?mode=project",
