@@ -8,6 +8,8 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     bson (1.8.6)
+    bson_ext (1.8.6)
+      bson (~> 1.8.6)
     builder (3.0.4)
     i18n (0.6.1)
     mongo (1.8.6)
@@ -36,6 +38,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   mongo_mapper
   mongomapper_id2
   shotgun
